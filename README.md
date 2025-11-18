@@ -49,12 +49,59 @@ source venv/bin/activate
 python demo_lmstudio.py
 ```
 
+### 2. Semantic Search Engine (`semantic_search.py`)
+
+A practical search tool that finds documents by meaning, not just keywords.
+
+**What it does:**
+- Indexes text files from a directory (md, py, txt, js, json, csv, log, rst)
+- Generates and caches embeddings to avoid recomputation
+- Searches by semantic meaning using cosine similarity
+- Returns ranked results with similarity scores and previews
+- Automatically chunks large documents for better granularity
+
+**Key features:**
+- Works on any directory of text files
+- Smart filtering (skips venv, node_modules, .git, etc.)
+- Persistent caching (`embeddings_cache.json`) - first run generates, subsequent runs load from cache
+- Interactive mode or single-query mode
+- Each directory gets its own cache file for portability
+
+**To run:**
+```bash
+# Make sure LM Studio server is running with embedding model loaded
+source venv/bin/activate
+
+# Interactive mode (searches current directory)
+python semantic_search.py
+
+# Single query mode
+python semantic_search.py /path/to/docs -q "your search query"
+
+# Search current directory with a query
+python semantic_search.py . -q "your search query"
+
+# Reindex (useful after adding new files)
+python semantic_search.py --reindex
+```
+
+**Example searches:**
+- "how to calculate similarity" - finds code/docs about cosine similarity
+- "error handling" - finds error-related code across multiple files
+- "configuration setup" - finds setup and config documentation
+
+**What we learned:**
+- Chunking text (1000 chars with 100 char overlap) improves search quality
+- Caching embeddings is essential for good performance
+- Semantic search finds relevant content even with different wording
+- ~0.55+ similarity scores indicate good matches
+
 ## Next Steps & Ideas
 
 Here are potential experiments to explore:
 
 ### Practical Applications
-- **Semantic Search Engine** - Search through personal documents/notes by meaning, not just keywords
+- ✅ **Semantic Search Engine** - Search through personal documents/notes by meaning, not just keywords (COMPLETED)
 - **Code Similarity Finder** - Find duplicate or similar code across your codebase
 - **Document Clustering** - Automatically organize documents by topic with visualization
 - **Personal Knowledge RAG** - Build a Q&A system over your personal knowledge base
@@ -88,14 +135,18 @@ Here are potential experiments to explore:
 - **Cosine similarity**: Measures how similar two embeddings are (0-1 scale, higher = more similar)
 - **LM Studio API**: Compatible with OpenAI's API format, making it easy to use existing libraries
 - **Performance**: Sub-second inference for generating embeddings locally
+- **Chunking strategy**: Breaking documents into overlapping chunks improves search quality
+- **Caching**: Essential for performance - avoids regenerating embeddings repeatedly
 
 ### Current State
 - ✅ Basic demo working with LM Studio
 - ✅ Understanding of how embeddings capture semantic relationships
-- ✅ Foundation for building more complex applications
-- ⏳ Next: Choose an experiment from the ideas list above
+- ✅ Semantic search engine for practical document search
+- ✅ Embedding caching for performance
+- ⏳ Next: Try document clustering, RAG system, or other experiments
 
-### Key Insights from Demo
-- "dog" and "puppy" achieve ~0.80 similarity despite different words
-- Unrelated topics (dogs vs cars) score much lower (~0.45)
-- The model understands meaning, not just keyword matching
+### Key Insights
+- "dog" and "puppy" achieve ~0.80 similarity despite different words (demo)
+- Unrelated topics (dogs vs cars) score much lower ~0.45 (demo)
+- Semantic search finds relevant docs even with different wording (search engine)
+- Similarity scores ~0.55+ indicate good semantic matches (search engine)
