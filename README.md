@@ -12,9 +12,19 @@ EmbeddingGemma is a 300M parameter open embedding model that:
 
 ## Resources
 
-- [Official Announcement](https://developers.googleblog.com/en/introducing-embeddinggemma/)
-- [Fine-tuning Guide](https://ai.google.dev/gemma/docs/embeddinggemma/fine-tuning-embeddinggemma-with-sentence-transformers)
-- [Ollama Integration](https://ollama.com/library/embeddinggemma)
+### Official Documentation
+- [Official Announcement Blog Post](https://developers.googleblog.com/en/introducing-embeddinggemma/) - Google's introduction to EmbeddingGemma with technical details and benchmarks
+- [Fine-tuning Guide](https://ai.google.dev/gemma/docs/embeddinggemma/fine-tuning-embeddinggemma-with-sentence-transformers) - How to customize EmbeddingGemma for domain-specific tasks
+- [Google AI Documentation](https://ai.google.dev/gemma/docs/embeddinggemma) - Complete technical documentation
+
+### Model Access & Tools
+- [LM Studio Model](https://lmstudio.ai/models/google/embedding-gemma-300m) - Download and use via LM Studio GUI
+- [Ollama Integration](https://ollama.com/library/embeddinggemma) - Command-line tool for running EmbeddingGemma locally
+- [Hugging Face](https://huggingface.co/google/embedding-gemma-300m) - Direct model access for Python
+
+### Community & Examples
+- [Simon Willison's Analysis](https://simonwillison.net/2025/Sep/4/embedding-gemma/) - Practical insights and browser-based demo
+- [Research Paper](https://arxiv.org/abs/2509.20354) - "EmbeddingGemma: Powerful and Lightweight Text Representations"
 
 ## What We've Built
 
@@ -70,3 +80,22 @@ Here are potential experiments to explore:
    pip install openai numpy
    ```
 3. Start LM Studio's local server with the embedding model loaded
+
+## Session Notes
+
+### What We Learned
+- **Embeddings basics**: Text is converted to 768-dimensional vectors that capture semantic meaning
+- **Cosine similarity**: Measures how similar two embeddings are (0-1 scale, higher = more similar)
+- **LM Studio API**: Compatible with OpenAI's API format, making it easy to use existing libraries
+- **Performance**: Sub-second inference for generating embeddings locally
+
+### Current State
+- ✅ Basic demo working with LM Studio
+- ✅ Understanding of how embeddings capture semantic relationships
+- ✅ Foundation for building more complex applications
+- ⏳ Next: Choose an experiment from the ideas list above
+
+### Key Insights from Demo
+- "dog" and "puppy" achieve ~0.80 similarity despite different words
+- Unrelated topics (dogs vs cars) score much lower (~0.45)
+- The model understands meaning, not just keyword matching
