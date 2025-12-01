@@ -94,7 +94,7 @@ python semantic_search.py --reindex
 - Chunking text (1000 chars with 100 char overlap) improves search quality
 - Caching embeddings is essential for good performance
 - Semantic search finds relevant content even with different wording
-- ~0.55+ similarity scores indicate good matches
+- Similarity thresholds: 0.80+ (very similar), 0.60+ (good match), 0.40+ (weak match), <0.40 (unrelated)
 
 ## Next Steps & Ideas
 
@@ -149,4 +149,4 @@ Here are potential experiments to explore:
 - "dog" and "puppy" achieve ~0.80 similarity despite different words (demo)
 - Unrelated topics (dogs vs cars) score much lower ~0.45 (demo)
 - Semantic search finds relevant docs even with different wording (search engine)
-- Similarity scores ~0.55+ indicate good semantic matches (search engine)
+- Similarity thresholds: 0.80+ (very similar), 0.60+ (good match), 0.40+ (weak match), <0.40 (unrelated)
